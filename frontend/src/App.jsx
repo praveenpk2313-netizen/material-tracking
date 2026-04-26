@@ -1,0 +1,117 @@
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthContext, AuthProvider } from './context/AuthContext';
+import Sidebar from './components/Sidebar';
+import ProtectedRoute from './components/ProtectedRoute';
+
+// Pages
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import Materials from './pages/Materials';
+import HRMS from './pages/HRMS';
+import AdminDashboard from './pages/AdminDashboard';
+import EmployeeDashboard from './pages/EmployeeDashboard';
+import HRDashboard from './pages/HRDashboard';
+import ManagerDashboard from './pages/ManagerDashboard';
+import SalesDashboard from './pages/SalesDashboard';
+import TeamPerformance from './pages/TeamPerformance';
+import Payroll from './pages/Payroll';
+import Attendance from './pages/Attendance';
+import HRReports from './pages/HRReports';
+import Settings from './pages/Settings';
+import Reports from './pages/Reports';
+import ERP from './pages/ERP';
+import CRM from './pages/CRM';
+import Vendors from './pages/Vendors';
+import NotificationsPage from './pages/Notifications';
+import MyTasks from './pages/MyTasks';
+import MyAttendance from './pages/MyAttendance';
+import LeaveManagement from './pages/LeaveManagement';
+import MySalaryPage from './pages/MySalary';
+import Customers from './pages/Customers';
+import SalesPipeline from './pages/SalesPipeline';
+import FollowUps from './pages/FollowUps';
+
+const AppContent = () => {
+    const { user, loading, logout } = useContext(AuthContext);
+
+    if (loading) return <div className="app-loading">Loading...</div>;
+
+    return (
+        <div className="app-layout">
+            {user && <Sidebar logout={logout} />}
+            <main className={`main-content ${user ? 'with-sidebar' : ''}`}>
+                <Routes>
+                    {/* Public Route */}
+                    <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+                    
+                    {/* Protected Root Route - Dispatches to correct dashboard */}
+                    <Route path="/" element={
+                        <ProtectedRoute>
+                            {user?.role === 'Admin' ? <AdminDashboard /> : 
+                             user?.role === 'HR' ? <HRDashboard /> :
+                             user?.role === 'Manager' ? <ManagerDashboard /> : 
+                             user?.role === 'Sales' ? <SalesDashboard /> : 
+                             user?.role === 'Employee' ? <EmployeeDashboard /> : <Dashboard />}
+                        </ProtectedRoute>
+                    } />
+                    
+                    {/* Role Specific Protected Routes */}
+                    <Route path="/materials" element={<ProtectedRoute allowedRoles={['Admin', 'Manager', 'Sales']}><Materials /></ProtectedRoute>} />
+                    <Route path="/hrms" element={<ProtectedRoute allowedRoles={['Admin', 'HR']}><HRMS /></ProtectedRoute>} />
+                    <Route path="/payroll" element={<ProtectedRoute allowedRoles={['Admin', 'HR']}><Payroll /></ProtectedRoute>} />
+                    <Route path="/attendance" element={<ProtectedRoute allowedRoles={['Admin', 'HR', 'Manager']}><Attendance /></ProtectedRoute>} />
+                    <Route path="/hr-reports" element={<ProtectedRoute allowedRoles={['Admin', 'HR']}><HRReports /></ProtectedRoute>} />
+                    <Route path="/team-performance" element={<ProtectedRoute allowedRoles={['Admin', 'Manager']}><TeamPerformance /></ProtectedRoute>} />
+                    <Route path="/erp" element={<ProtectedRoute allowedRoles={['Admin', 'Manager', 'Sales']}><ERP /></ProtectedRoute>} />
+                    <Route path="/crm" element={<ProtectedRoute allowedRoles={['Admin', 'Sales', 'Manager']}><CRM /></ProtectedRoute>} />
+                    <Route path="/vendors" element={<ProtectedRoute allowedRoles={['Admin', 'Manager', 'Sales']}><Vendors /></ProtectedRoute>} />
+                    <Route path="/analytics" element={<ProtectedRoute allowedRoles={['Admin', 'Manager', 'Sales', 'HR']}><Reports /></ProtectedRoute>} />
+                    <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
+                    <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+
+                    {/* Sales Routes */}
+                    <Route path="/customers" element={<ProtectedRoute allowedRoles={['Admin', 'Sales', 'Manager']}><Customers /></ProtectedRoute>} />
+                    <Route path="/sales-pipeline" element={<ProtectedRoute allowedRoles={['Admin', 'Sales', 'Manager']}><SalesPipeline /></ProtectedRoute>} />
+                    <Route path="/follow-ups" element={<ProtectedRoute allowedRoles={['Admin', 'Sales', 'Manager']}><FollowUps /></ProtectedRoute>} />
+
+                    {/* Employee Routes */}
+                    <Route path="/my-tasks" element={<ProtectedRoute><MyTasks /></ProtectedRoute>} />
+                    <Route path="/my-attendance" element={<ProtectedRoute><MyAttendance /></ProtectedRoute>} />
+                    <Route path="/my-salary" element={<ProtectedRoute><MySalaryPage /></ProtectedRoute>} />
+                    <Route path="/leave-management" element={<ProtectedRoute><LeaveManagement /></ProtectedRoute>} />
+
+                    {/* Fallback */}
+                    <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+            </main>
+
+            <style jsx="true">{`
+                .app-layout {
+                    display: flex;
+                    min-height: 100vh;
+                }
+                .main-content {
+                    flex: 1;
+                    transition: all 0.3s ease;
+                }
+                .main-content.with-sidebar {
+                    margin-left: 260px;
+                }
+                .p-30 { padding: 30px; }
+            `}</style>
+        </div>
+    );
+};
+
+const App = () => {
+    return (
+        <AuthProvider>
+            <Router>
+                <AppContent />
+            </Router>
+        </AuthProvider>
+    );
+};
+
+export default App;
