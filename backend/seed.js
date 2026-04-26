@@ -22,11 +22,11 @@ const seedData = async () => {
 
         // Create Users for each Role
         const users = [
-            { name: 'Admin User', email: 'admin@smtbm.com', password: 'admin123', role: 'Admin' },
-            { name: 'HR Manager', email: 'hr@smtbm.com', password: 'hr123', role: 'HR' },
-            { name: 'Store Manager', email: 'manager@smtbm.com', password: 'manager123', role: 'Manager' },
-            { name: 'Sales Head', email: 'sales@smtbm.com', password: 'sales123', role: 'Sales' },
-            { name: 'General Employee', email: 'employee@smtbm.com', password: 'employee123', role: 'Employee' },
+            { name: 'Admin User', email: 'admin@smtbms.com', password: 'admin123', role: 'Admin' },
+            { name: 'HR Manager', email: 'hr@smtbms.com', password: 'hr123', role: 'HR' },
+            { name: 'Store Manager', email: 'manager@smtbms.com', password: 'manager123', role: 'Manager' },
+            { name: 'Sales Head', email: 'sales@smtbms.com', password: 'sales123', role: 'Sales' },
+            { name: 'General Employee', email: 'employee@smtbms.com', password: 'employee123', role: 'Employee' },
         ];
 
         for (const u of users) {
@@ -54,9 +54,9 @@ const seedData = async () => {
 
         // Leads
         await Lead.insertMany([
-            { name: 'Global Solutions', email: 'sales@globalsol.com', source: 'Web', status: 'New' },
-            { name: 'NextGen Systems', email: 'hello@nextgen.io', source: 'Referral', status: 'Contacted' },
-            { name: 'Prime Industries', email: 'ceo@primeind.com', source: 'LinkedIn', status: 'Qualified' }
+            { name: 'Global Solutions', email: 'sales@globalsol.com', source: 'Web', status: 'Awaiting Review' },
+            { name: 'NextGen Systems', email: 'hello@nextgen.io', source: 'Referral', status: 'Initial Contact' },
+            { name: 'Prime Industries', email: 'ceo@primeind.com', source: 'LinkedIn', status: 'Qualified Lead' }
         ]);
 
         console.log('Data Seeded Successfully!');
