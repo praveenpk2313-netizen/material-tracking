@@ -316,6 +316,8 @@ const NotificationsPage = () => {
                     margin-bottom: 22px;
                     border-bottom: 1px solid var(--border);
                     padding-bottom: 14px;
+                    overflow-x: auto;
+                    -webkit-overflow-scrolling: touch;
                 }
                 .n-tab {
                     display: flex;
@@ -330,6 +332,7 @@ const NotificationsPage = () => {
                     font-weight: 600;
                     cursor: pointer;
                     transition: all 0.2s;
+                    white-space: nowrap;
                 }
                 .n-tab:hover { background: rgba(255,255,255,0.06); color: #fff; }
                 .n-tab.active {
@@ -413,7 +416,6 @@ const NotificationsPage = () => {
                     display: flex;
                     gap: 6px;
                     flex-shrink: 0;
-                    opacity: 0;
                     transition: opacity 0.2s;
                 }
                 .notif-card:hover .n-card-actions { opacity: 1; }
@@ -472,6 +474,19 @@ const NotificationsPage = () => {
                 @keyframes slideUp {
                     from { opacity: 0; transform: translateY(16px); }
                     to   { opacity: 1; transform: translateY(0); }
+                }
+
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .module-header { flex-direction: column; align-items: flex-start; }
+                    .header-actions { width: 100%; flex-direction: column; }
+                    .n-action-btn { width: 100%; justify-content: center; }
+                    .n-tab { flex: 1; justify-content: center; }
+                    .notif-card { padding: 15px; gap: 12px; }
+                    .n-icon-box { width: 40px; height: 40px; }
+                    .n-meta { flex-direction: column; align-items: flex-start; gap: 4px; }
+                    .n-card-actions { opacity: 1; }
+                    .n-toast { left: 20px; right: 20px; bottom: 20px; }
                 }
             `}</style>
         </div>

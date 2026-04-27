@@ -140,23 +140,23 @@ const HRDashboard = () => {
 
             <style jsx="true">{`
                 .hr-wrapper { padding: 30px; display: flex; flex-direction: column; gap: 30px; }
-                .hr-header { display: flex; justify-content: space-between; align-items: flex-end; }
+                .hr-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
                 .hr-search { display: flex; align-items: center; gap: 10px; padding: 10px 20px; width: 300px; }
                 .hr-search input { background: none; border: none; color: white; width: 100%; }
                 
-                .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+                .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
                 .hr-main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
                 
                 .chart-section, .pie-section { padding: 25px; }
                 .chart-container-hr { height: 250px; margin-top: 20px; }
                 .pie-container-hr { height: 200px; margin-top: 20px; }
                 
-                .card-header-between { display: flex; justify-content: space-between; align-items: center; }
+                .card-header-between { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
                 .text-btn { background: none; color: var(--primary); font-size: 13px; font-weight: 600; }
                 
-                .action-btns-flex { display: flex; gap: 8px; }
-                .btn-approve-sm { background: rgba(16, 185, 129, 0.1); color: #10b981; font-size: 12px; padding: 5px 12px; border-radius: 6px; display: flex; align-items: center; gap: 5px; }
-                .btn-reject-sm { background: rgba(239, 68, 68, 0.1); color: #ef4444; font-size: 12px; padding: 5px 12px; border-radius: 6px; display: flex; align-items: center; gap: 5px; }
+                .action-btns-flex { display: flex; gap: 8px; flex-wrap: wrap; }
+                .btn-approve-sm { background: rgba(16, 185, 129, 0.1); color: #10b981; font-size: 12px; padding: 5px 12px; border-radius: 6px; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+                .btn-reject-sm { background: rgba(239, 68, 68, 0.1); color: #ef4444; font-size: 12px; padding: 5px 12px; border-radius: 6px; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
                 
                 .hr-bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
                 .events-card { padding: 25px; }
@@ -169,6 +169,22 @@ const HRDashboard = () => {
                 .mt-30 { margin-top: 30px; }
                 .loader { width: 40px; height: 40px; border: 3px solid rgba(99, 102, 241, 0.1); border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
                 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+                @media (max-width: 1024px) {
+                    .hr-main-grid, .hr-bottom-grid { grid-template-columns: 1fr; }
+                }
+
+                @media (max-width: 768px) {
+                    .hr-wrapper { padding: 15px; gap: 20px; }
+                    .hr-header { flex-direction: column; align-items: flex-start; }
+                    .hr-search { width: 100%; }
+                    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+                }
+
+                @media (max-width: 480px) {
+                    .grid-4 { grid-template-columns: 1fr; }
+                    .card-header-between { flex-direction: column; align-items: flex-start; }
+                }
             `}</style>
         </div>
     );

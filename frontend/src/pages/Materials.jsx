@@ -231,12 +231,10 @@ const MaterialTracking = () => {
                         <p className="text-muted">No materials found.</p>
                     </div>
                 )}
-            </div>
-
-            <style jsx="true">{`
+            </div>            <style jsx="true">{`
                 .module-container { padding: 30px; }
                 .module-header { margin-bottom: 25px; padding: 20px; }
-                .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+                .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 15px; }
                 .header-filters { display: flex; gap: 15px; }
                 .search-bar { flex: 1; position: relative; }
                 .search-icon { position: absolute; left: 15px; top: 12px; color: var(--text-muted); }
@@ -244,11 +242,11 @@ const MaterialTracking = () => {
                 .filter-btn { background: rgba(255,255,255,0.05); color: white; padding: 0 20px; border-radius: 8px; border: 1px solid var(--border); }
                 
                 .modern-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-                .modern-table th { text-align: left; padding: 15px; color: var(--text-muted); font-weight: 500; font-size: 14px; border-bottom: 1px solid var(--border); }
+                .modern-table th { text-align: left; padding: 15px; color: var(--text-muted); font-weight: 500; font-size: 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
                 .modern-table td { padding: 18px 15px; border-bottom: 1px solid var(--border); font-size: 15px; }
                 .sku-code { background: rgba(99,102,241,0.1); color: var(--primary); padding: 4px 8px; border-radius: 4px; font-family: monospace; }
                 
-                .status-badge { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+                .status-badge { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; }
                 .status-badge.in-stock { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
                 .status-badge.low-stock { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
                 .status-badge.out-of-stock { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
@@ -260,18 +258,18 @@ const MaterialTracking = () => {
                 
                 .flex-center { display: flex; align-items: center; justify-content: center; }
                 .gap-10 { gap: 10px; }
-                .table-card { padding: 5px; overflow-x: auto; }
+                .table-card { padding: 5px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
                 /* Modal Styles */
-                .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-                .modal-content { width: 90%; max-width: 600px; padding: 30px; position: relative; }
+                .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1100; padding: 20px; }
+                .modal-content { width: 100%; max-width: 600px; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; }
                 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
                 .close-btn { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
                 .modal-form { display: flex; flex-direction: column; gap: 20px; }
                 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
                 .form-group { display: flex; flex-direction: column; gap: 8px; }
                 .form-group label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
-                .form-group input, .form-group select { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; }
+                .form-group input, .form-group select { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; width: 100%; }
                 .form-group select option { background: #1e293b; color: white; }
                 .full-width { grid-column: 1 / -1; }
                 .modal-actions { display: flex; justify-content: flex-end; gap: 15px; margin-top: 10px; }
@@ -281,15 +279,29 @@ const MaterialTracking = () => {
                 @keyframes pop { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
                 /* Filter Bar */
-                .filter-bar-mat { padding: 15px 25px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; }
+                .filter-bar-mat { padding: 15px 25px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
                 .filter-group { display: flex; align-items: center; gap: 12px; }
                 .filter-group label { font-size: 14px; font-weight: 600; color: var(--text-muted); }
                 .filter-group select { padding: 8px 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 6px; color: white; min-width: 150px; }
                 .filter-group select option { background: #1e293b; color: white; }
 
                 .animate-slide-down { animation: slideDown 0.3s ease-out; overflow: hidden; }
-                @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); max-height: 0; } to { opacity: 1; transform: translateY(0); max-height: 100px; } }
+                @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); max-height: 0; } to { opacity: 1; transform: translateY(0); max-height: 200px; } }
+
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .header-top { flex-direction: column; align-items: flex-start; }
+                    .header-top h1 { font-size: 24px; }
+                    .header-top button { width: 100%; }
+                    .header-filters { flex-direction: column; }
+                    .filter-btn { padding: 10px; height: 45px; }
+                    .form-grid { grid-template-columns: 1fr; }
+                    .modal-content { padding: 20px; }
+                    .modal-actions { flex-direction: column; }
+                    .modal-actions button { width: 100%; }
+                }
             `}</style>
+>
         </div>
     );
 };

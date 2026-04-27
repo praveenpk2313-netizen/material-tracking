@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { 
     LayoutDashboard, 
@@ -14,11 +14,20 @@ import {
     Calendar,
     CheckCircle,
     DollarSign,
-    PhoneCall
+    PhoneCall,
+    X
 } from 'lucide-react';
 
-const Sidebar = ({ logout }) => {
+const Sidebar = ({ logout, isOpen, onClose }) => {
     const { user } = useContext(AuthContext);
+    const location = useLocation();
+
+    // Close sidebar on route change on mobile
+    useEffect(() => {
+        if (window.innerWidth <= 768) {
+            onClose();
+        }
+    }, [location, onClose]);
     
     const adminMenu = [
         { path: '/', name: 'Dashboard', icon: <LayoutDashboard size={20} /> },
@@ -77,9 +86,14 @@ const Sidebar = ({ logout }) => {
                       user?.role === 'Sales' ? salesMenu : employeeMenu;
 
     return (
-        <aside className="sidebar">
-            <div className="sidebar-logo">
-                <h2 className="title-gradient">SMTBMS</h2>
+        <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
+            <div className="sidebar-header">
+                <div className="sidebar-logo">
+                    <h2 className="title-gradient">SMTBMS</h2>
+                </div>
+                <button className="close-sidebar mobile-only" onClick={onClose}>
+                    <X size={24} />
+                </button>
             </div>
             <nav className="sidebar-nav">
                 {menuItems.map((item) => (
@@ -114,13 +128,26 @@ const Sidebar = ({ logout }) => {
                     top: 0;
                     padding: 20px 0;
                     z-index: 1000;
+                    transition: transform 0.3s ease;
+                }
+                .sidebar-header {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0 25px 30px;
                 }
                 .sidebar-logo {
-                    padding: 0 25px 30px;
+                    padding: 0;
+                }
+                .close-sidebar {
+                    background: transparent;
+                    color: var(--text-main);
+                    padding: 0;
                 }
                 .sidebar-nav {
                     flex: 1;
                     padding: 0 15px;
+                    overflow-y: auto;
                 }
                 .nav-item {
                     display: flex;
@@ -155,6 +182,15 @@ const Sidebar = ({ logout }) => {
                 .logout-btn:hover {
                     color: var(--danger);
                     background: rgba(239, 68, 68, 0.1);
+                }
+
+                @media (max-width: 768px) {
+                    .sidebar {
+                        transform: translateX(-100%);
+                    }
+                    .sidebar.open {
+                        transform: translateX(0);
+                    }
                 }
             `}</style>
         </aside>

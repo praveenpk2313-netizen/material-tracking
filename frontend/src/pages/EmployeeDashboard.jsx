@@ -528,6 +528,27 @@ const EmployeeDashboard = () => {
                 @media (max-width: 1100px) {
                     .emp-main-grid { grid-template-columns: 1fr; }
                 }
+
+                @media (max-width: 768px) {
+                    .emp-wrapper { padding: 15px; gap: 20px; }
+                    .emp-header { flex-direction: column; gap: 15px; }
+                    .emp-name { font-size: 24px; }
+                    .notif-btn { display: none; }
+                    .emp-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+                    .attend-card { padding: 16px; }
+                    .timer-ring { width: 140px; height: 140px; }
+                    .ring-timer { font-size: 18px; }
+                    .time-pills { gap: 10px; }
+                    .time-pill { min-width: 50px; }
+                    .pill-value { font-size: 13px; }
+                    .quick-grid { grid-template-columns: repeat(2, 1fr); }
+                }
+
+                @media (max-width: 480px) {
+                    .emp-stats { grid-template-columns: 1fr; }
+                    .quick-grid { grid-template-columns: 1fr; }
+                    .time-pills { flex-wrap: wrap; }
+                }
             `}</style>
         </div>
     );

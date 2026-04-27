@@ -328,22 +328,23 @@ const AdminDashboard = () => {
                 .count-badge { position: absolute; top: -5px; right: -5px; background: var(--danger); width: 16px; height: 16px; border-radius: 50%; font-size: 10px; display: flex; align-items: center; justify-content: center; color: white; }
                 .nav-user-dropdown { display: flex; align-items: center; gap: 12px; border-left: 1px solid var(--border); padding-left: 20px; }
                 .user-avatar img { width: 35px; height: 35px; border-radius: 10px; }
+                .user-info-brief { display: block; }
                 .user-name { font-size: 14px; font-weight: 600; }
                 .user-role { font-size: 11px; color: var(--primary); font-weight: 700; text-transform: uppercase; }
 
                 /* Header */
-                .admin-header-flex { display: flex; justify-content: space-between; align-items: flex-end; }
-                .header-actions { display: flex; gap: 12px; }
+                .admin-header-flex { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+                .header-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
                 /* Grids */
-                .stats-grid-admin { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+                .stats-grid-admin { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
                 .analytics-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
                 .dashboard-mid-section { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
                 .admin-tables-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 25px; }
 
                 .big-chart, .small-chart { padding: 25px; }
                 .chart-wrapper { height: 300px; margin-top: 20px; }
-                .card-header { display: flex; justify-content: space-between; align-items: center; }
+                .card-header { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
                 .chart-legend { display: flex; gap: 15px; }
                 .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
                 .dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -353,7 +354,7 @@ const AdminDashboard = () => {
                 /* Alert Banner */
                 .alert-banner { display: flex; align-items: center; gap: 15px; padding: 15px 25px; border-radius: 12px; }
                 .alert-banner.warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; }
-                .alert-action-btn { background: #f59e0b; color: white; padding: 6px 15px; border-radius: 6px; font-weight: 600; font-size: 12px; margin-left: auto; }
+                .alert-action-btn { background: #f59e0b; color: white; padding: 6px 15px; border-radius: 6px; font-weight: 600; font-size: 12px; margin-left: auto; white-space: nowrap; }
 
                 /* Module Shortcuts */
                 .module-shortcuts { padding: 20px; }
@@ -401,6 +402,27 @@ const AdminDashboard = () => {
                 /* Responsive */
                 @media (max-width: 1280px) {
                     .analytics-grid, .dashboard-mid-section, .admin-tables-grid { grid-template-columns: 1fr; }
+                }
+
+                @media (max-width: 768px) {
+                    .admin-wrapper { padding: 15px; gap: 20px; }
+                    .admin-navbar { display: none; }
+                    .admin-header-flex { flex-direction: column; align-items: flex-start; gap: 15px; }
+                    .header-actions { width: 100%; }
+                    .header-actions button { flex: 1; font-size: 12px; }
+                    .alert-section-grid { grid-template-columns: 1fr; }
+                    .stats-grid-admin { grid-template-columns: repeat(2, 1fr); }
+                    .approval-list { grid-template-columns: 1fr; }
+                    .chart-wrapper { height: 250px; }
+                    .card-header h3 { font-size: 16px; }
+                }
+
+                @media (max-width: 480px) {
+                    .stats-grid-admin { grid-template-columns: 1fr; }
+                    .header-actions { flex-direction: column; }
+                    .app-actions { flex-direction: column; width: 100%; }
+                    .btn-table-action { width: 100%; }
+                    .approval-card { flex-direction: column; align-items: flex-start; gap: 15px; }
                 }
 
                 .admin-loading { height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }

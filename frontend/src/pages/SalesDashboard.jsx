@@ -150,11 +150,11 @@ const SalesDashboard = () => {
 
             <style jsx="true">{`
                 .sales-wrapper { padding: 30px; display: flex; flex-direction: column; gap: 30px; }
-                .sales-header { display: flex; justify-content: space-between; align-items: flex-end; }
+                .sales-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
                 .search-bar-glass { display: flex; align-items: center; gap: 10px; padding: 10px 20px; background: rgba(255,255,255,0.03); border-radius: 12px; }
                 .search-bar-glass input { background: none; border: none; color: white; width: 250px; }
                 
-                .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+                .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
                 .sales-main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
                 
                 .performance-chart-box, .pipeline-box { padding: 25px; }
@@ -183,6 +183,23 @@ const SalesDashboard = () => {
                 .mt-30 { margin-top: 30px; }
                 .badge-pill { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
                 .badge-pill.info { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
+
+                @media (max-width: 1024px) {
+                    .sales-main-grid { grid-template-columns: 1fr; }
+                }
+
+                @media (max-width: 768px) {
+                    .sales-wrapper { padding: 15px; gap: 20px; }
+                    .sales-header { flex-direction: column; align-items: flex-start; }
+                    .search-bar-glass { width: 100%; }
+                    .search-bar-glass input { width: 100%; }
+                    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+                    .pipeline-viz { flex-direction: column; height: auto; gap: 20px; }
+                }
+
+                @media (max-width: 480px) {
+                    .grid-4 { grid-template-columns: 1fr; }
+                }
             `}</style>
         </div>
     );

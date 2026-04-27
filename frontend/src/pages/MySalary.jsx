@@ -148,7 +148,7 @@ const MySalaryPage = () => {
 
             <style jsx="true">{`
                 .module-container { padding: 30px; }
-                .status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+                .status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; }
                 .status-badge.paid { background: rgba(16, 185, 129, 0.1); color: #10b981; }
                 .status-badge.approved { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
                 .status-badge.awaiting-approval { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
@@ -159,7 +159,7 @@ const MySalaryPage = () => {
                 .icon-btn:hover { background: var(--primary); color: white; }
 
                 .modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
-                .modal-container-salary { width: 100%; max-width: 550px; padding: 0; overflow: hidden; border: 1px solid var(--border); }
+                .modal-container-salary { width: 100%; max-width: 550px; padding: 0; overflow: hidden; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto; }
                 .modal-head { padding: 20px 25px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
                 .btn-close { background: none; color: var(--text-muted); cursor: pointer; }
                 
@@ -181,6 +181,13 @@ const MySalaryPage = () => {
                 .mt-30 { margin-top: 30px; }
                 .flex-center { display: flex; align-items: center; justify-content: center; }
                 .gap-10 { gap: 10px; }
+
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .info-grid { grid-template-columns: 1fr; }
+                    .payslip-footer-total { font-size: 18px; padding: 15px; }
+                    .modal-actions button { width: 100%; }
+                }
             `}</style>
         </div>
     );

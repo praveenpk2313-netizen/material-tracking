@@ -361,15 +361,14 @@ const LeaveManagement = () => {
                 )}
             </div>
 
-            <style>{`
+            <style jsx="true">{`
                 .module-container { padding: 30px; position: relative; }
-                .module-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; }
+                .module-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; gap: 20px; }
 
                 /* ── Toast ── */
                 .lv-toast { position: fixed; bottom: 28px; right: 28px; display: flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; z-index: 9999; animation: slideUp 0.3s ease; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
                 .lv-toast.ok  { background: rgba(16,185,129,0.15); border: 1px solid #10b981; color: #10b981; }
                 .lv-toast.err { background: rgba(239,68,68,0.15);  border: 1px solid #ef4444; color: #ef4444; }
-                @keyframes slideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 
                 /* ── Balance grid ── */
                 .lv-balance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 28px; }
@@ -384,8 +383,8 @@ const LeaveManagement = () => {
                 .lv-progress-fill { height: 100%; border-radius: 10px; transition: width 0.6s ease; }
 
                 /* ── Modal ── */
-                .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-                .lv-form-card { width: 90%; max-width: 600px; padding: 32px; }
+                .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1100; padding: 20px; }
+                .lv-form-card { width: 100%; max-width: 600px; padding: 32px; max-height: 90vh; overflow-y: auto; }
                 .lv-form-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
                 .lv-form { display: flex; flex-direction: column; gap: 20px; }
                 .lv-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -394,7 +393,7 @@ const LeaveManagement = () => {
                 .form-group input, .form-group select, .form-group textarea {
                     padding: 11px 14px; background: rgba(255,255,255,0.05);
                     border: 1px solid var(--border); border-radius: 8px; color: white; font-size: 14px;
-                    transition: border-color 0.2s;
+                    transition: border-color 0.2s; width: 100%;
                 }
                 .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
                     outline: none; border-color: var(--primary);
@@ -410,28 +409,28 @@ const LeaveManagement = () => {
                 /* ── Table card ── */
                 .lv-table-card { padding: 8px; overflow-x: auto; }
                 .lv-table-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px 12px; }
-                .lv-table { width: 100%; border-collapse: collapse; }
+                .lv-table { width: 100%; border-collapse: collapse; min-width: 700px; }
                 .lv-table th { text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); letter-spacing: 0.5px; }
                 .lv-table td { padding: 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
                 .lv-table tbody tr:hover { background: rgba(255,255,255,0.02); }
                 .lv-reason { max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
                 /* ── Type tags ── */
-                .lv-type-tag { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+                .lv-type-tag { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
                 .lv-type-tag.annual  { background: rgba(99,102,241,0.1); color: #6366f1; }
                 .lv-type-tag.sick    { background: rgba(16,185,129,0.1); color: #10b981; }
                 .lv-type-tag.casual  { background: rgba(245,158,11,0.1); color: #f59e0b; }
                 .lv-type-tag.unpaid  { background: rgba(100,116,139,0.1); color: #64748b; }
 
                 /* ── Status pills ── */
-                .lv-status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+                .lv-status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
                 .lv-status-pill.approved  { background: rgba(16,185,129,0.1); color: #10b981; }
                 .lv-status-pill.pending   { background: rgba(245,158,11,0.1); color: #f59e0b; }
                 .lv-status-pill.rejected  { background: rgba(239,68,68,0.1);  color: #ef4444; }
                 .lv-status-pill.cancelled { background: rgba(100,116,139,0.1);color: #64748b; }
 
                 /* ── Cancel button ── */
-                .lv-cancel-btn { display: flex; align-items: center; gap: 5px; background: none; color: #ef4444; font-size: 13px; font-weight: 600; cursor: pointer; }
+                .lv-cancel-btn { display: flex; align-items: center; gap: 5px; background: none; color: #ef4444; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
                 .lv-cancel-btn:hover { text-decoration: underline; }
                 .lv-note { font-size: 12px; cursor: help; }
                 
@@ -444,7 +443,7 @@ const LeaveManagement = () => {
                 
                 .lv-review-details { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
                 .lv-review-details p { font-size: 14px; margin: 0; }
-                .lv-emp-info { display: flex; flex-direction: column; }
+                .lv-emp-info { display: flex; flex-direction: column; min-width: 120px; }
 
                 /* ── Loading / empty ── */
                 .lv-loading, .lv-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 48px 20px; color: var(--text-muted); text-align: center; }
@@ -455,9 +454,15 @@ const LeaveManagement = () => {
                 .flex-center { display: flex; align-items: center; justify-content: center; }
                 .gap-10 { gap: 10px; }
 
-                @media (max-width: 900px) {
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .module-header { flex-direction: column; align-items: flex-start; }
+                    .module-header button { width: 100%; }
                     .lv-balance-grid { grid-template-columns: 1fr; }
                     .lv-form-grid { grid-template-columns: 1fr; }
+                    .lv-form-actions { flex-direction: column; }
+                    .lv-form-actions button { width: 100%; }
+                    .lv-toast { left: 20px; right: 20px; bottom: 20px; }
                 }
             `}</style>
         </div>

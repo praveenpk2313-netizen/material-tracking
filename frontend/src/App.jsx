@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContext, AuthProvider } from './context/AuthContext';
 import Sidebar from './components/Sidebar';
 import ProtectedRoute from './components/ProtectedRoute';
+import { Menu, X } from 'lucide-react';
 
 // Pages
 import Dashboard from './pages/Dashboard';
@@ -34,12 +35,31 @@ import FollowUps from './pages/FollowUps';
 
 const AppContent = () => {
     const { user, loading, logout } = useContext(AuthContext);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     if (loading) return <div className="app-loading">Loading...</div>;
 
+    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
     return (
         <div className="app-layout">
-            {user && <Sidebar logout={logout} />}
+            {user && (
+                <>
+                    <header className="mobile-header">
+                        <button onClick={toggleSidebar} className="menu-toggle">
+                            {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                        <h2 className="title-gradient">SMTBMS</h2>
+                        <div style={{ width: 24 }}></div> {/* Spacer */}
+                    </header>
+                    <Sidebar 
+                        logout={logout} 
+                        isOpen={isSidebarOpen} 
+                        onClose={() => setIsSidebarOpen(false)} 
+                    />
+                    {isSidebarOpen && <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)}></div>}
+                </>
+            )}
             <main className={`main-content ${user ? 'with-sidebar' : ''}`}>
                 <Routes>
                     {/* Public Route */}
@@ -90,15 +110,63 @@ const AppContent = () => {
                 .app-layout {
                     display: flex;
                     min-height: 100vh;
+                    flex-direction: column;
+                }
+                .mobile-header {
+                    display: none;
+                    height: 60px;
+                    background: var(--glass);
+                    backdrop-filter: blur(10px);
+                    border-bottom: 1px solid var(--border);
+                    position: sticky;
+                    top: 0;
+                    z-index: 900;
+                    padding: 0 20px;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+                .menu-toggle {
+                    background: transparent;
+                    color: var(--text-main);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .sidebar-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.5);
+                    z-index: 950;
+                    backdrop-filter: blur(2px);
                 }
                 .main-content {
                     flex: 1;
                     transition: all 0.3s ease;
+                    width: 100%;
                 }
                 .main-content.with-sidebar {
                     margin-left: 260px;
                 }
                 .p-30 { padding: 30px; }
+
+                @media (max-width: 768px) {
+                    .app-layout {
+                        flex-direction: column;
+                    }
+                    .mobile-header {
+                        display: flex;
+                    }
+                    .main-content.with-sidebar {
+                        margin-left: 0;
+                        padding-top: 0;
+                    }
+                    .p-30 {
+                        padding: 15px;
+                    }
+                }
             `}</style>
         </div>
     );

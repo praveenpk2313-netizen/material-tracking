@@ -241,11 +241,9 @@ const HRMS = () => {
                         <p className="text-muted">No employees found in the system.</p>
                     </div>
                 )}
-            </div>
-
-            <style jsx="true">{`
+            </di            <style jsx="true">{`
                 .module-container { padding: 30px; }
-                .employee-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 25px; }
+                .employee-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 25px; }
                 .employee-card { text-align: center; display: flex; flex-direction: column; align-items: center; }
                 .emp-avatar { width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; margin-bottom: 15px; }
                 .designation { color: var(--primary); font-size: 14px; margin-bottom: 20px; font-weight: 500; }
@@ -258,15 +256,15 @@ const HRMS = () => {
                 .w-full { grid-column: 1 / -1; }
 
                 /* Modal Styles */
-                .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-                .modal-content { width: 90%; max-width: 600px; padding: 30px; position: relative; text-align: left; }
+                .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1100; padding: 20px; }
+                .modal-content { width: 100%; max-width: 600px; padding: 30px; position: relative; text-align: left; max-height: 90vh; overflow-y: auto; }
                 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
                 .close-btn { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
                 .modal-form { display: flex; flex-direction: column; gap: 20px; }
                 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
                 .form-group { display: flex; flex-direction: column; gap: 8px; }
                 .form-group label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
-                .form-group input, .form-group select { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; }
+                .form-group input, .form-group select { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; width: 100%; }
                 .form-group select option { background: #1e293b; color: white; }
                 .full-width { grid-column: 1 / -1; }
                 .modal-actions { display: flex; justify-content: flex-end; gap: 15px; margin-top: 10px; }
@@ -278,7 +276,7 @@ const HRMS = () => {
                 /* Profile View Styles */
                 .profile-view { background: rgba(255,255,255,0.02); border-radius: 15px; padding: 25px; border: 1px solid var(--border); }
                 .profile-top { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
-                .emp-avatar-lg { width: 80px; height: 80px; background: var(--primary); color: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; }
+                .emp-avatar-lg { width: 80px; height: 80px; background: var(--primary); color: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; flex-shrink: 0; }
                 .profile-titles h3 { font-size: 20px; margin-bottom: 5px; }
                 .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
                 .profile-item label { display: block; font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; }
@@ -291,7 +289,22 @@ const HRMS = () => {
 
                 .flex-center { display: flex; align-items: center; justify-content: center; }
                 .gap-10 { gap: 10px; }
+
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .employee-grid { grid-template-columns: 1fr; }
+                    .form-grid, .profile-grid { grid-template-columns: 1fr; }
+                    .profile-top { flex-direction: column; text-align: center; }
+                    .modal-content { padding: 20px; }
+                    .modal-actions { flex-direction: column; }
+                    .modal-actions button { width: 100%; }
+                    .profile-view { padding: 15px; }
+                    .header-top { flex-direction: column; align-items: flex-start; gap: 15px; }
+                    .header-top h1 { font-size: 24px; }
+                    .header-top button { width: 100%; }
+                }
             `}</style>
+le>
         </div>
     );
 };

@@ -219,13 +219,13 @@ const MyAttendance = () => {
 
             <style jsx="true">{`
                 .module-container { padding: 30px; }
-                .module-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+                .module-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; gap: 20px; }
                 
                 .attendance-grid { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 20px; }
                 
                 .active-session-card { padding: 25px; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); }
                 .session-info { display: flex; align-items: center; gap: 20px; }
-                .timer-icon-box { background: var(--glass); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: var(--primary); border: 1px solid var(--border); }
+                .timer-icon-box { background: var(--glass); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: var(--primary); border: 1px solid var(--border); flex-shrink: 0; }
                 .session-label { font-size: 13px; color: var(--text-muted); display: block; }
                 .live-timer { font-size: 32px; font-weight: 800; color: white; margin-top: 5px; font-variant-numeric: tabular-nums; }
                 .session-details { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border); }
@@ -253,6 +253,21 @@ const MyAttendance = () => {
 
                 @media (max-width: 1200px) {
                     .attendance-grid { grid-template-columns: 1fr; }
+                }
+
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .module-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+                    .header-actions { width: 100%; }
+                    .header-actions button { width: 100%; }
+                    .live-timer { font-size: 24px; }
+                    .summary-section { flex-direction: row; flex-wrap: wrap; }
+                    .s-box { flex: 1; min-width: 200px; }
+                }
+
+                @media (max-width: 480px) {
+                    .summary-section { flex-direction: column; }
+                    .s-box { width: 100%; }
                 }
             `}</style>
         </div>

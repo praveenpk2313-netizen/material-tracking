@@ -126,30 +126,28 @@ const Vendors = () => {
                         )}
                     />
                 </div>
-            </div>
-
-            <style jsx="true">{`
+            </div>            <style jsx="true">{`
                 .module-container { padding: 30px; }
-                .module-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; padding: 25px; }
+                .module-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; padding: 25px; gap: 20px; }
                 .table-wrapper { padding: 10px; }
-                .cat-tag { background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+                .cat-tag { background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; white-space: nowrap; }
                 .info-cell { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted); }
                 .contact-cell { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-muted); }
                 .btn-icon { background: none; color: var(--primary); }
 
                 /* Modal Styles */
-                .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-                .modal-content { width: 90%; max-width: 600px; padding: 30px; position: relative; }
+                .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1100; padding: 20px; }
+                .modal-content { width: 100%; max-width: 600px; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; }
                 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
                 .close-btn { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
                 .modal-form { display: flex; flex-direction: column; gap: 20px; }
                 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
                 .form-group { display: flex; flex-direction: column; gap: 8px; }
                 .form-group label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
-                .form-group input, .form-group select { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; }
+                .form-group input, .form-group select { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; width: 100%; }
                 .form-group select option { background: #1e293b; color: white; }
                 .modal-actions { display: flex; justify-content: flex-end; gap: 15px; margin-top: 10px; }
-                .btn-cancel { background: transparent; color: white; border: 1px solid var(--border); padding: 12px 25px; border-radius: 8px; font-weight: 600; }
+                .btn-cancel { background: transparent; color: white; border: 1px solid var(--border); padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; }
                 
                 .animate-pop { animation: pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
                 @keyframes pop { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
@@ -157,7 +155,19 @@ const Vendors = () => {
                 .flex-center { display: flex; align-items: center; justify-content: center; }
                 .gap-10 { gap: 10px; }
                 .gap-5 { gap: 5px; }
+
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .module-header { flex-direction: column; align-items: flex-start; padding: 20px; }
+                    .header-actions { width: 100%; }
+                    .header-actions button { width: 100%; }
+                    .form-grid { grid-template-columns: 1fr; }
+                    .modal-actions { flex-direction: column; }
+                    .modal-actions button { width: 100%; }
+                    .contact-cell { min-width: 150px; }
+                }
             `}</style>
+>
         </div>
     );
 };

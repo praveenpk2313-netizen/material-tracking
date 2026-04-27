@@ -105,6 +105,18 @@ const Login = () => {
                     border-radius: 8px;
                     margin-top: 20px;
                 }
+
+                @media (max-width: 480px) {
+                    .auth-card {
+                        padding: 20px 15px;
+                    }
+                    .auth-card h2 {
+                        font-size: 24px;
+                    }
+                    .auth-wrapper {
+                        padding: 15px;
+                    }
+                }
             `}</style>
         </div>
     );

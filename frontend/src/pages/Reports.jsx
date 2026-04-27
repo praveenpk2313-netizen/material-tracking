@@ -369,7 +369,7 @@ const Reports = () => {
                 @keyframes slideInRight { from { opacity:0; transform: translateX(50px); } to { opacity:1; transform: translateX(0); } }
 
                 /* Header */
-                .report-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+                .report-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; gap: 20px; }
                 .header-actions { display: flex; gap: 12px; align-items: center; }
 
                 /* Date Range Picker */
@@ -381,12 +381,12 @@ const Reports = () => {
                 /* KPI Row */
                 .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 25px; }
                 .kpi-card { display: flex; align-items: center; gap: 15px; padding: 20px; }
-                .kpi-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+                .kpi-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
                 .kpi-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
                 .kpi-value { font-size: 22px; font-weight: 700; }
 
                 /* Report Cards */
-                .reports-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+                .reports-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
                 .report-card { display: flex; align-items: center; gap: 20px; padding: 22px; transition: 0.3s; }
                 .report-card:hover { border-color: var(--primary); transform: translateY(-3px); }
                 .report-icon-box { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -399,13 +399,13 @@ const Reports = () => {
 
                 /* Analytics Section */
                 .analytics-section { padding: 25px; }
-                .analytics-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-                .analytics-controls { display: flex; align-items: center; gap: 12px; }
-                .chart-tabs { display: flex; background: rgba(255,255,255,0.03); border-radius: 10px; padding: 4px; border: 1px solid var(--border); }
-                .chart-tab { padding: 7px 16px; border-radius: 7px; font-size: 13px; font-weight: 500; color: var(--text-muted); transition: 0.2s; }
+                .analytics-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
+                .analytics-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+                .chart-tabs { display: flex; background: rgba(255,255,255,0.03); border-radius: 10px; padding: 4px; border: 1px solid var(--border); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+                .chart-tab { padding: 7px 16px; border-radius: 7px; font-size: 13px; font-weight: 500; color: var(--text-muted); transition: 0.2s; white-space: nowrap; }
                 .chart-tab.active { background: var(--primary); color: white; }
                 .chart-tab:hover:not(.active) { color: white; }
-                .chart-container { height: 320px; }
+                .chart-container { height: 320px; width: 100%; }
                 .chart-loading, .chart-empty { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; }
 
                 /* Filters */
@@ -415,17 +415,17 @@ const Reports = () => {
                 .filter-label { font-size: 11px; color: var(--text-muted); padding: 5px 15px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
                 .filter-option { padding: 9px 15px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: 0.2s; }
                 .filter-option:hover, .filter-option.active { background: rgba(99,102,241,0.15); color: var(--primary); }
-                .refresh-btn { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); cursor: pointer; transition: 0.2s; }
+                .refresh-btn { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); cursor: pointer; transition: 0.2s; flex-shrink: 0; }
                 .refresh-btn:hover { color: var(--primary); border-color: var(--primary); }
 
                 /* Custom Report Modal */
-                .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-                .modal-box { width: min(500px, 90vw); padding: 30px; }
+                .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1100; padding: 20px; }
+                .modal-box { width: 100%; max-width: 500px; padding: 30px; max-height: 90vh; overflow-y: auto; }
                 .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
                 .close-x { background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; }
                 .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
                 .form-group label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
-                .form-group input, .form-group select { padding: 11px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; font-size: 14px; }
+                .form-group input, .form-group select { padding: 11px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; font-size: 14px; width: 100%; }
                 .form-group select option { background: #1e293b; color: white; }
                 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
                 .modal-foot { display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 20px; }
@@ -442,7 +442,19 @@ const Reports = () => {
                 @keyframes pop { from { opacity:0; transform: scale(0.9); } to { opacity:1; transform: scale(1); } }
 
                 @media (max-width: 1100px) { .kpi-row { grid-template-columns: 1fr 1fr; } }
-                @media (max-width: 700px) { .kpi-row { grid-template-columns: 1fr; } .report-header { flex-direction: column; gap: 15px; } }
+                @media (max-width: 768px) {
+                    .reports-container { padding: 15px; }
+                    .report-header { flex-direction: column; align-items: flex-start; }
+                    .header-actions { width: 100%; flex-direction: column; }
+                    .header-actions button, .date-range-wrapper { width: 100%; }
+                    .header-actions button { justify-content: center; }
+                    .kpi-row { grid-template-columns: 1fr; }
+                    .analytics-header { flex-direction: column; align-items: flex-start; }
+                    .chart-tabs { width: 100%; }
+                    .form-row-2 { grid-template-columns: 1fr; }
+                    .modal-foot { flex-direction: column; }
+                    .modal-foot button { width: 100%; }
+                }
             `}</style>
         </div>
     );

@@ -129,11 +129,11 @@ const ManagerDashboard = () => {
 
             <style jsx="true">{`
                 .manager-wrapper { padding: 30px; display: flex; flex-direction: column; gap: 30px; }
-                .manager-header { display: flex; justify-content: space-between; align-items: flex-end; }
+                .manager-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
                 .search-box-glass { display: flex; align-items: center; gap: 10px; padding: 10px 20px; background: rgba(255,255,255,0.03); border-radius: 12px; }
                 .search-box-glass input { background: none; border: none; color: white; width: 250px; }
                 
-                .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+                .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
                 .manager-main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
 
                 .main-chart-box, .approval-queue { padding: 25px; }
@@ -164,6 +164,22 @@ const ManagerDashboard = () => {
 
                 .mt-30 { margin-top: 30px; }
                 .id-font { font-family: monospace; color: var(--primary); font-weight: 700; }
+
+                @media (max-width: 1024px) {
+                    .manager-main-grid { grid-template-columns: 1fr; }
+                }
+
+                @media (max-width: 768px) {
+                    .manager-wrapper { padding: 15px; gap: 20px; }
+                    .manager-header { flex-direction: column; align-items: flex-start; }
+                    .search-box-glass { width: 100%; }
+                    .search-box-glass input { width: 100%; }
+                    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+                }
+
+                @media (max-width: 480px) {
+                    .grid-4 { grid-template-columns: 1fr; }
+                }
             `}</style>
         </div>
     );

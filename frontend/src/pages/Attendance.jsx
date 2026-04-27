@@ -107,12 +107,13 @@ const Attendance = () => {
 
             <style jsx="true">{`
                 .module-container { padding: 30px; }
-                .module-header { display: flex; justify-content: space-between; align-items: flex-end; }
+                .module-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+                .header-actions { width: 100%; max-width: 300px; }
                 .search-bar-sm { display: flex; align-items: center; gap: 10px; padding: 10px 20px; }
-                .search-bar-sm input { background: none; border: none; color: white; }
+                .search-bar-sm input { background: none; border: none; color: white; width: 100%; }
                 
-                .attendance-controls { display: flex; gap: 15px; }
-                .date-selector, .dept-selector { padding: 8px 15px; font-size: 13px; font-weight: 500; }
+                .attendance-controls { display: flex; gap: 15px; flex-wrap: wrap; }
+                .date-selector, .dept-selector { padding: 8px 15px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
                 
                 .date-input-clean, .dept-select-clean {
                     background: none;
@@ -125,7 +126,7 @@ const Attendance = () => {
                 }
                 .dept-select-clean option { background: #0f172a; color: white; }
 
-                .status-pill-flex { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+                .status-pill-flex { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; }
                 .status-pill-flex.present { background: rgba(16, 185, 129, 0.1); color: #10b981; }
                 .status-pill-flex.absent { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
 
@@ -133,6 +134,15 @@ const Attendance = () => {
                 .mt-20 { margin-top: 20px; }
                 .flex-center { display: flex; align-items: center; justify-content: center; }
                 .gap-10 { gap: 10px; }
+
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .module-header { flex-direction: column; align-items: flex-start; }
+                    .header-actions { max-width: 100%; }
+                    .attendance-controls { flex-direction: column; }
+                    .date-selector, .dept-selector { width: 100%; justify-content: flex-start; }
+                    .date-input-clean, .dept-select-clean { width: 100%; }
+                }
             `}</style>
         </div>
     );

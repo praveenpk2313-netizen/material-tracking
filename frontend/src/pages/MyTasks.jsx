@@ -248,22 +248,23 @@ const MyTasks = () => {
 
             <style jsx="true">{`
                 .module-container { padding: 30px; }
-                .module-header { display: flex; justify-content: space-between; align-items: flex-end; padding: 20px; }
-                .search-bar-sm { display: flex; align-items: center; gap: 10px; padding: 8px 15px; }
-                .search-bar-sm input { background: none; border: none; color: white; outline: none; font-size: 14px; }
+                .module-header { display: flex; justify-content: space-between; align-items: flex-end; padding: 25px; gap: 20px; }
+                .header-actions { display: flex; gap: 15px; align-items: center; }
+                .search-bar-sm { display: flex; align-items: center; gap: 10px; padding: 10px 15px; min-width: 250px; }
+                .search-bar-sm input { background: none; border: none; color: white; outline: none; font-size: 14px; width: 100%; }
                 
-                .task-filters { display: flex; gap: 10px; }
+                .task-filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
                 .filter-pill { padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.03); color: var(--text-muted); cursor: pointer; border: 1px solid var(--border); transition: all 0.2s; }
                 .filter-pill.active { background: var(--primary); color: white; border-color: var(--primary); }
 
                 .task-title-cell p { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
                 
-                .priority-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+                .priority-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; background: rgba(255,255,255,0.05); white-space: nowrap; }
                 .priority-tag.high { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
                 .priority-tag.medium { color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
                 .priority-tag.low { color: #10b981; background: rgba(16, 185, 129, 0.1); }
 
-                .status-pill { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+                .status-pill { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
                 .status-pill.pending { color: #f59e0b; }
                 .status-pill.in-progress { color: var(--primary); }
                 .status-pill.completed { color: #10b981; }
@@ -282,17 +283,17 @@ const MyTasks = () => {
                 .user-tag, .broadcast-tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(99, 102, 241, 0.1); color: var(--primary); border-radius: 12px; font-size: 12px; font-weight: 600; }
                 .broadcast-tag { background: rgba(16, 185, 129, 0.1); color: #10b981; }
 
-                .btn-table-action { background: var(--primary); color: white; font-size: 12px; padding: 6px 15px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+                .btn-table-action { background: var(--primary); color: white; font-size: 12px; padding: 6px 15px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
                 
-                .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 2000; }
-                .modal-content-lg { width: 90%; max-width: 650px; padding: 30px; }
+                .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+                .modal-content-lg { width: 100%; max-width: 650px; padding: 30px; max-height: 90vh; overflow-y: auto; }
                 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
                 
                 .modal-form { display: flex; flex-direction: column; gap: 20px; }
                 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
                 .form-group { display: flex; flex-direction: column; gap: 8px; }
                 .form-group label { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
-                .form-group input, .form-group select, .form-group textarea { padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; color: white; font-size: 14px; }
+                .form-group input, .form-group select, .form-group textarea { padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; color: white; font-size: 14px; width: 100%; }
                 .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.4); }
                 .form-group select { appearance: none; padding-right: 40px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
                 .form-group select option { background: #1e293b; color: white; }
@@ -307,6 +308,20 @@ const MyTasks = () => {
                 .spin-icon { animation: spin 1s linear infinite; }
                 @keyframes spin { to { transform: rotate(360deg); } }
                 .p-50 { padding: 50px; }
+
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .module-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+                    .header-actions { width: 100%; flex-direction: column; }
+                    .search-bar-sm { width: 100%; min-width: unset; }
+                    .header-actions button { width: 100%; }
+                    .form-grid { grid-template-columns: 1fr; }
+                    .modal-content-lg { padding: 20px; }
+                    .modal-actions { flex-direction: column; }
+                    .modal-actions button { width: 100%; }
+                    .task-filters { justify-content: center; }
+                    .filter-pill { flex: 1; text-align: center; min-width: 120px; }
+                }
             `}</style>
         </div>
     );

@@ -198,12 +198,10 @@ const ERP = () => {
                         )}
                     />
                 </div>
-            </div>
-
-            <style jsx="true">{`
-                .module-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; padding: 25px; }
+            </div>            <style jsx="true">{`
+                .module-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; padding: 25px; gap: 20px; }
                 .header-actions { display: flex; gap: 12px; }
-                .table-wrapper { padding: 20px; }
+                .table-wrapper { padding: 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
                 .id-tag { color: var(--primary); font-family: monospace; font-weight: 700; }
                 .status-pill.awaiting-approval { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
                 .status-pill.approved { background: rgba(16, 185, 129, 0.1); color: #10b981; }
@@ -216,28 +214,28 @@ const ERP = () => {
                 .btn-approve:hover { transform: scale(1.05); filter: brightness(1.1); }
 
                 /* Filter Bar */
-                .filter-bar { padding: 15px 25px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; }
+                .filter-bar { padding: 15px 25px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
                 .filter-group { display: flex; align-items: center; gap: 12px; }
                 .filter-group label { font-size: 14px; font-weight: 600; color: var(--text-muted); }
                 .filter-group select { padding: 8px 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 6px; color: white; min-width: 150px; }
                 .filter-group select option { background: #1e293b; color: white; }
 
                 /* Modal & ERP Forms */
-                .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-                .modal-content { width: 90%; max-width: 700px; padding: 30px; position: relative; }
+                .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1100; padding: 20px; }
+                .modal-content { width: 100%; max-width: 700px; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; }
                 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
                 .close-btn { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
                 .modal-form { display: flex; flex-direction: column; gap: 20px; }
                 .form-group { display: flex; flex-direction: column; gap: 8px; }
                 .form-group label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
-                .form-group select, .form-group input { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; }
+                .form-group select, .form-group input { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: white; width: 100%; }
                 .form-group select option { background: #1e293b; color: white; }
                 
                 .items-section { border: 1px solid var(--border); padding: 20px; border-radius: 12px; display: flex; flex-direction: column; gap: 15px; }
                 .item-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px; align-items: center; }
                 .item-subtotal { font-weight: 700; color: var(--primary); text-align: right; }
                 
-                .order-summary-box { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
+                .order-summary-box { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; gap: 15px; }
                 .order-summary-box strong { color: var(--primary); font-size: 24px; }
                 
                 .modal-actions { display: flex; justify-content: flex-end; gap: 15px; margin-top: 10px; }
@@ -250,11 +248,25 @@ const ERP = () => {
                 @keyframes pop { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
                 
                 .animate-slide-down { animation: slideDown 0.3s ease-out; overflow: hidden; }
-                @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); max-height: 0; } to { opacity: 1; transform: translateY(0); max-height: 100px; } }
+                @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); max-height: 0; } to { opacity: 1; transform: translateY(0); max-height: 200px; } }
 
                 .flex-center { display: flex; align-items: center; justify-content: center; }
                 .gap-10 { gap: 10px; }
+
+                @media (max-width: 768px) {
+                    .module-header { flex-direction: column; align-items: flex-start; padding: 20px; }
+                    .header-actions { width: 100%; flex-direction: column; }
+                    .header-actions button { width: 100%; }
+                    .item-row { grid-template-columns: 1fr; gap: 10px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+                    .item-subtotal { text-align: left; }
+                    .order-summary-box { flex-direction: column; align-items: flex-start; }
+                    .order-summary-box strong { font-size: 20px; }
+                    .modal-actions { flex-direction: column; }
+                    .modal-actions button { width: 100%; }
+                    .table-wrapper { padding: 10px; }
+                }
             `}</style>
+>
         </div>
     );
 };
