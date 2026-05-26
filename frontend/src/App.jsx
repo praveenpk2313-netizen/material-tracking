@@ -149,6 +149,7 @@ const AppContent = () => {
                 }
                 .main-content.with-sidebar {
                     margin-left: 260px;
+                    width: calc(100% - 260px);
                 }
                 .p-30 { padding: 30px; }
 
@@ -161,6 +162,7 @@ const AppContent = () => {
                     }
                     .main-content.with-sidebar {
                         margin-left: 0;
+                        width: 100%;
                         padding-top: 0;
                     }
                     .p-30 {

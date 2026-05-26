@@ -142,7 +142,8 @@ const CRM = () => {
                         )}
                     />
                 </div>
-            </div>            <style jsx="true">{`
+            </div>
+            <style jsx="true">{`
                 .module-container { padding: 30px; }
                 .module-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; padding: 25px; gap: 20px; }
                 .crm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -199,7 +200,6 @@ const CRM = () => {
                     .modal-actions button { width: 100%; }
                 }
             `}</style>
->
         </div>
     );
 };

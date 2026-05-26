@@ -241,7 +241,8 @@ const HRMS = () => {
                         <p className="text-muted">No employees found in the system.</p>
                     </div>
                 )}
-            </di            <style jsx="true">{`
+            </div>
+            <style jsx="true">{`
                 .module-container { padding: 30px; }
                 .employee-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 25px; }
                 .employee-card { text-align: center; display: flex; flex-direction: column; align-items: center; }
@@ -304,7 +305,6 @@ const HRMS = () => {
                     .header-top button { width: 100%; }
                 }
             `}</style>
-le>
         </div>
     );
 };

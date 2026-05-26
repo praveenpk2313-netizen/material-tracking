@@ -167,7 +167,6 @@ const Vendors = () => {
                     .contact-cell { min-width: 150px; }
                 }
             `}</style>
->
         </div>
     );
 };

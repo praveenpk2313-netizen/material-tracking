@@ -266,7 +266,6 @@ const ERP = () => {
                     .table-wrapper { padding: 10px; }
                 }
             `}</style>
->
         </div>
     );
 };

@@ -102,6 +102,14 @@ const TeamPerformance = () => {
                 .status-badge.active { background: rgba(255,255,255,0.03); color: var(--text-muted); }
                 
                 .mt-30 { margin-top: 30px; }
+
+                @media (max-width: 768px) {
+                    .module-container { padding: 15px; }
+                    .performance-viz-grid { grid-template-columns: 1fr; }
+                    .kpi-column { flex-direction: column; }
+                    .main-viz { padding: 15px; }
+                    .kpi-box { padding: 15px; }
+                }
             `}</style>
         </div>
     );
